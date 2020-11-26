@@ -8,35 +8,53 @@ use App\Models\Employee;
 
 class EmployeeController extends Controller
 {
+    private $employee;
+
+	public function __construct(Employee $employee)
+	{
+		$this->employee = $employee;
+	}
 
     public function index()
     {
-        $employee = Employee::all();
-        return $employee;
+      
+        return $this->employee->all();
     }
 
 
     public function store(Request $request)
     {
-        Employee::create($request->all());
+
+        $id = $this->employee->create($request->all());
+        $message = ['data' => ['msg' => 'Funcionario inserido com sucesso!', 'status' => 201]];
+		return $message;
     }
 
     public function show($id)
     {
-        $employee = Employee::findOrfail($id);
+        $employee = $this->employee->find($id);
         return $employee;
     }
 
     public function update(Request $request, $id)
     {
-        $employee = Employee::findOrfail($id);
-        $employee->update($request->all());
+
+        $employee = $this->employee->find($id);
+		$employee->update($request->all());
+        $message = ['data' => ['msg' => 'Funcionario atualizado com sucesso!', 'status' => 200]];
+		return $message;
+       
 
     }
 
     public function destroy($id)
     {
-        $employee = Employee::findOrfail($id);
+
+        $employee = $this->employee->find($id);
         $employee->delete();
+        $message = ['data' => ['msg' => 'Funcionario: ' . $employee->name . ' removido com sucesso!', 'status' => 200]];
+		return $message;
+
+        
     }
 }
