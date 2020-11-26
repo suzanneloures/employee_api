@@ -18,7 +18,7 @@ class ApiTest extends TestCase
     {
         $response = $this->postJson('/api/employees', ['name' => 'Funcionario', 'email'=>'funciorioteste@hotmail.com', "admission" => '2020-01-01', 'salary' => '1500']);
         $response
-            ->assertStatus(200)
+            ->assertStatus(201)
             ->assertJson([
                 'data' => [
                     'status' => 201,

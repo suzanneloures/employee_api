@@ -5,6 +5,8 @@ namespace App\Http\Controllers\api;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Employee;
+use Validator;
+use Illuminate\Http\Response;
 
 class EmployeeController extends Controller
 {
@@ -21,13 +23,26 @@ class EmployeeController extends Controller
         return $this->employee->all();
     }
 
+    public function make_validator($values){
+        $validator = Validator::make($values, [
+            'name' => 'required|max:100',
+            'email' => 'email|required|max:100',
+            'salary' => 'required|numeric',
+            'admission'=> 'date|required'
+        ]);
+        return $validator;
+    }
 
     public function store(Request $request)
     {
-
+        $validator = $this->make_validator($request->all());
+        if($validator->fails()){
+            $message = ['data' => ['error' => $validator->errors()->all(), 'status' => 400]];
+            return response()->json($message,400);
+        }
         $id = $this->employee->create($request->all());
         $message = ['data' => ['msg' => 'Funcionario inserido com sucesso!', 'status' => 201]];
-		return $message;
+		return response()->json($message,201);
     }
 
     public function show($id)
@@ -38,11 +53,15 @@ class EmployeeController extends Controller
 
     public function update(Request $request, $id)
     {
-
+        $validator = $this->make_validator($request->all());
+        if($validator->fails()){
+            $message = ['data' => ['error' => $validator->errors()->all(), 'status' => 400]];
+            return response()->json($message,400);
+        }
         $employee = $this->employee->find($id);
 		$employee->update($request->all());
         $message = ['data' => ['msg' => 'Funcionario atualizado com sucesso!', 'status' => 200]];
-		return $message;
+		return response()->json($message,200);
        
 
     }
