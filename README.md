@@ -12,4 +12,4 @@ Script de criação do banco de dados
 - https://documenter.getpostman.com/view/13587273/TVmHDz4d#960e510c-1fdb-4ea9-a3e9-a5efe8d53734
 
 ### Testes
-- Para rodar os testes utilize o comando: vendor\bin\phpunit 
+- Para executar testes utilize o comando: vendor\bin\phpunit 
