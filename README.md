@@ -8,5 +8,8 @@ Pagina web que utilizará a API com Bootstrap e Jquery. Realizando: Visualizaç�
 - db
 Script de criação do banco de dados
 
-#### Documentação da API
-https://documenter.getpostman.com/view/13587273/TVmHDz4d#960e510c-1fdb-4ea9-a3e9-a5efe8d53734
+### Documentação da API
+- https://documenter.getpostman.com/view/13587273/TVmHDz4d#960e510c-1fdb-4ea9-a3e9-a5efe8d53734
+
+### Testes
+- Para rodar os testes utilize o comando: vendor\bin\phpunit 
