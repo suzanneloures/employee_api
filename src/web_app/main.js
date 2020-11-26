@@ -85,6 +85,14 @@ function createEmployee(data){
               ).then(function(){
                 loadEmployees();
             });
+        },
+        error: function(result){
+            console.log(result);
+            Swal.fire(
+                'Erro.',
+                result.responseJSON.data.error.join('<br/>'),
+                'error'
+              );
         }
     });
 
@@ -111,6 +119,14 @@ function updateEmployee(id ,data){
               ).then(function(){
                 loadEmployees();
             });
+        },
+        error: function(result){
+            console.log(result);
+            Swal.fire(
+                'Erro.',
+                result.responseJSON.data.error.join('<br/>'),
+                'error'
+              );
         }
     });
 }
